@@ -14,7 +14,7 @@ Code of a simple bot that can make using WolframAlpha easier. Either by inline m
 
 ### TODO:
 - Fork or create our own wrapper for Telegram Bot API and make it work well with WolframAlpha
-- Implement server side whitelist (of users allowedto use the bot)
+- Implement server side whitelist (of users allowed to use the bot)
 - Deploy the code onto a server
 - Make final test of everything
 
