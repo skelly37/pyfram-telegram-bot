@@ -27,7 +27,7 @@ class Bot:
 
         return "Query result saved in: " + self.__get_image(query)
 
-def temp_test(self):
+def temp_test():
     b = Bot("APP_ID")
     print(f"2+2= {b.query_wolfram('2+2')}")
     print(f"Poland (should return text): {b.query_wolfram('Poland')}")
