@@ -1,26 +1,36 @@
 from requests import get
 from urllib.request import urlretrieve
+from urllib.parse import quote_plus
 
-appID = #your appID
 
-def short_anwser(query):
-	query = "https://api.wolframalpha.com/v1/result?appid=" + appID + "&i=" + query
-	return get(query).text
+class Bot:
+    def __init__(self, appID):
+        self.appID = appID
 
-def get_image(query):
-	filename = query + ".png"
-	
-	query = "https://api.wolframalpha.com/v1/simple?appid=" + appID + "&i=" + query
-	query += "&background=F5F5F5"
-	query += "&fontsize=20"
-	
-	urlretrieve(query, filename)
-	return filename
+    def __short_anwser(self, sequery):
+        url = "https://api.wolframalpha.com/v1/result?appid={}&i={}"
+        query = url.format(self.appID, quote_plus(sequery))
+        return get(query).text
 
-def query_wolfram(query, is_image=False):
-	if not is_image:
-		out = short_anwser(query)
-		if out.strip() != "No short answer available":
-			return out
+    def __get_image(self, query):
+        filename = "{}.png".format(query)
+        api_url = "https://api.wolframalpha.com/v1/simple?appid={}&i={}&background=F5F5F5&fontsize=20"
+        query = api_url.format(self.appID, quote_plus(query))
+        urlretrieve(query, filename)
+        return filename
 
-	return "Query result saved in: " + get_image(query)
+    def query_wolfram(self, query, is_image=False):
+        if not is_image:
+            out = self.__short_anwser(query)
+            if out.strip() != "No short answer available":
+                return out
+
+        return "Query result saved in: " + self.__get_image(query)
+
+def temp_test(self):
+    b = Bot("APP_ID")
+    print(f"2+2= {b.query_wolfram('2+2')}")
+    print(f"Poland (should return text): {b.query_wolfram('Poland')}")
+    print(f"Poland (should fetch image): {b.query_wolfram('Poland', True)}")
+
+temp_test()
