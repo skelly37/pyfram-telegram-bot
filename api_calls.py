@@ -2,7 +2,6 @@ from urllib.parse import quote_plus
 from requests import get
 from random import randint
 
-#TODO randomize API calls from list of few APIS
 
 class WolframBot:
     def __init__(self, app_ids) -> None:
