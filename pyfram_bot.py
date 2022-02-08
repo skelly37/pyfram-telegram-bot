@@ -14,7 +14,6 @@ if __name__ == "__main__":
     API_KEYS = [x.strip() for x in open("api_key.txt").readlines()]
     wolfram = WolframBot(API_KEYS)
 
-
 bot = telebot.TeleBot(TOKEN, parse_mode="MARKDOWN")
 
 #message is telebot.types.Message' type
