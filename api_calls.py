@@ -34,4 +34,4 @@ def temp_test() -> None:
     print(f"Poland (should return text): {b.query_wolfram('binomial coefficient')}")
     print(f"Poland (should fetch image): {b.query_wolfram('binomial coefficient', True)}")
 
-temp_test()
+#temp_test()
