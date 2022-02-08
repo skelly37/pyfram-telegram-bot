@@ -11,18 +11,21 @@ if __name__ == "__main__":
 
 bot = telebot.TeleBot(TOKEN, parse_mode="MARKDOWN")
 
-def is_authorized(message):
+#message is telebot.types.Message' type
+
+def is_authorized(message) -> bool:
+    print(type(message))
     return message.from_user.username in WHITELIST
 
 @bot.message_handler(commands=["start", "help"])
-def welcome_and_help(message):
+def welcome_and_help(message) -> None:
     if is_authorized(message):
         bot.reply_to(message, "Welcome to WolframAlpha bot. Only text input is supported.\nDefault option is to send short message if possible.\nUse /i or /image to force image output")
     else:
         bot.reply_to(message, "Sorry but you're not authorized to use this bot :)")
 
 @bot.message_handler(commands=["i", "image"])
-def send_image(message):
+def send_image(message) -> None:
     if is_authorized(message):
         text = message.text.replace("/i ", "").replace("/image ", "")
         search = wolfram.query_wolfram(text, is_image=True)
@@ -34,7 +37,7 @@ def send_image(message):
 
 
 @bot.message_handler(func=lambda message: True)
-def handle_query(message):
+def handle_query(message) -> None:
     if is_authorized(message):
         text = message.text
         search = wolfram.query_wolfram(text)
