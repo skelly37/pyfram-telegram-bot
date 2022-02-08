@@ -13,7 +13,8 @@ Code of a simple bot that can make using WolframAlpha easier. Either by inline m
 - [x] Python interface for WolframAlpha API
 
 ### TODO:
-- [ ] Write or find a webhook to work with Telegram Bot API (***current stuck***)
+- [x] Write or find a webhook to work with Telegram Bot API 
+  - solved with [telebot](https://github.com/eternnoir/pyTelegramBotAPI)
 - [ ] Put WolframAlpha interface into the webhook
 - [ ] Implement server side whitelist (of users allowed to use the bot)
 - [ ] Deploy the code onto a server
