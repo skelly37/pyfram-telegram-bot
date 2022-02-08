@@ -19,7 +19,7 @@ class WolframBot:
         urlretrieve(query, filename)
         return filename
 
-    def query_wolfram(self, query: str, is_image=False:) -> str:
+    def query_wolfram(self, query: str, is_image=False) -> str:
         if not is_image:
             out = self.__short_anwser(query)
             if out.strip() != "No short answer available":
