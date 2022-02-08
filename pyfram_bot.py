@@ -5,8 +5,8 @@ from api_calls import WolframBot
 if __name__ == "__main__":
     TOKEN = open("bot_token.txt").readline().strip()
     WHITELIST = [x.strip() for x in open("whitelist.txt").readlines()]
-    API_KEY = open("api_key.txt").readline().strip()
-    wolfram = WolframBot(API_KEY)
+    API_KEYS = [x.strip() for x in open("api_key.txt").readlines()]
+    wolfram = WolframBot(API_KEYS)
 
 
 bot = telebot.TeleBot(TOKEN, parse_mode="MARKDOWN")
@@ -14,7 +14,6 @@ bot = telebot.TeleBot(TOKEN, parse_mode="MARKDOWN")
 #message is telebot.types.Message' type
 
 def is_authorized(message) -> bool:
-    print(type(message))
     return message.from_user.username in WHITELIST
 
 @bot.message_handler(commands=["start", "help"])

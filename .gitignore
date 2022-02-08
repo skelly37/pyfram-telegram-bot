@@ -139,3 +139,6 @@ whitelist.txt
 
 #images from wolfram
 *.png
+
+#pycharm
+.idea
