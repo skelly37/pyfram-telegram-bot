@@ -5,21 +5,20 @@ Open-source backend for [WolframAlpha](https://wolframalpha.com) Telegram bot
 *almost finished*
 
 ### What will be here?
-Code of a simple bot that can make using WolframAlpha easier. Either by inline mode, or by starting a conversation with it, it will:
+Code of a simple bot that can make using WolframAlpha easier. By starting a conversation with it, it will:
 - Provide short anwser (default option)
 - Provide simple anwser as a .png file (fallback if no short anwser is available or if specified)
 
 ### Already done:
 - [x] Python interface for WolframAlpha API
-
-### TODO:
 - [x] Write or find a webhook to work with Telegram Bot API 
   - solved with [telebot](https://github.com/eternnoir/pyTelegramBotAPI)
 - [x] Put WolframAlpha interface into the webhook
-- [ ] Introduce type-checker for is_image in WolframBot.query_wolfram() and for telebot.types.Message calls in pyfram_bot.py
 - [x] Implement server side whitelist (of users allowed to use the bot)
+### TODO:
+- [ ] Introduce type-checker for is_image in WolframBot.query_wolfram() and for telebot.types.Message calls in pyfram_bot.py
 - [ ] Deploy the code onto a server
-- [ ] Write fancy `setup.py` and documentation
+- [ ] Write decent documentation
 - [ ] Make final test of everything
 
 ## Why won't we develop a public bot?
