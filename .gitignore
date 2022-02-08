@@ -131,5 +131,11 @@ dmypy.json
 #api key
 api_key.txt
 
+#telegram bot token
+bot_token.txt
+
+#users whitelist
+whitelist.txt
+
 #images from wolfram
 *.png

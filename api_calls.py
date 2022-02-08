@@ -1,6 +1,5 @@
-from urllib.request import urlretrieve, urlopen, Request
 from urllib.parse import quote_plus
-import telebot
+from requests import get
 
 class WolframBot:
     def __init__(self, appID: str) -> None:
@@ -9,14 +8,19 @@ class WolframBot:
     def __short_anwser(self, query: str) -> str:
         url = "https://api.wolframalpha.com/v1/result?appid={}&i={}"
         query = url.format(self.appID, quote_plus(query))
-        response = urlopen(Request(query))
-        return response.read().decode()
+        return get(query).text
 
     def __get_image(self, query: str) -> str:
         filename = "{}.png".format(query)
         api_url = "https://api.wolframalpha.com/v1/simple?appid={}&i={}&background=F5F5F5&fontsize=20"
         query = api_url.format(self.appID, quote_plus(query))
-        urlretrieve(query, filename)
+        r = get(query, stream = True)
+        if r.status_code == 200:
+            with open(filename, "wb") as f:
+                for chunk in r.iter_content(1024):
+                    f.write(chunk)
+
+
         return filename
 
     def query_wolfram(self, query: str, is_image=False) -> str:
@@ -26,12 +30,3 @@ class WolframBot:
                 return out
 
         return "Query result saved in: " + self.__get_image(query)
-
-def temp_test() -> None:
-    appid = open("api_key.txt").readline().strip()
-    b = WolframBot(appid)
-    print(f"2+2= {b.query_wolfram('2+2')}")
-    print(f"Poland (should return text): {b.query_wolfram('binomial coefficient')}")
-    print(f"Poland (should fetch image): {b.query_wolfram('binomial coefficient', True)}")
-
-#temp_test()
