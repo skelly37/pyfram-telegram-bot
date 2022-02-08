@@ -1,8 +1,9 @@
 from urllib.request import urlretrieve, urlopen, Request
 from urllib.parse import quote_plus
+from typing import Callable
 import telebot
 
-class Bot:
+class WolframBot:
     def __init__(self, appID: str) -> None:
         self.appID = appID
 
@@ -19,7 +20,7 @@ class Bot:
         urlretrieve(query, filename)
         return filename
 
-    def query_wolfram(self, query: str, is_image=False) -> str:
+    def query_wolfram(self, query: str, is_image=False:) -> str:
         if not is_image:
             out = self.__short_anwser(query)
             if out.strip() != "No short answer available":
@@ -29,7 +30,7 @@ class Bot:
 
 def temp_test() -> None:
     appid = open("api_key.txt").readline().strip()
-    b = Bot(appid)
+    b = WolframBot(appid)
     print(f"2+2= {b.query_wolfram('2+2')}")
     print(f"Poland (should return text): {b.query_wolfram('binomial coefficient')}")
     print(f"Poland (should fetch image): {b.query_wolfram('binomial coefficient', True)}")
