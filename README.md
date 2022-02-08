@@ -16,7 +16,7 @@ Code of a simple bot that can make using WolframAlpha easier. Either by inline m
 - [x] Write or find a webhook to work with Telegram Bot API 
   - solved with [telebot](https://github.com/eternnoir/pyTelegramBotAPI)
 - [x] Put WolframAlpha interface into the webhook
-- [ ] Introduce type-checker for is_image in WolframBot.query_wolfram()
+- [ ] Introduce type-checker for is_image in WolframBot.query_wolfram() and for telebot.types.Message calls in pyfram_bot.py
 - [x] Implement server side whitelist (of users allowed to use the bot)
 - [ ] Deploy the code onto a server
 - [ ] Write fancy `setup.py` and documentation
