@@ -1,6 +1,5 @@
 from urllib.request import urlretrieve, urlopen, Request
 from urllib.parse import quote_plus
-from typing import Callable
 import telebot
 
 class WolframBot:
