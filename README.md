@@ -15,7 +15,7 @@ Code of a simple bot that can make using WolframAlpha easier. By starting a conv
   - solved with [telebot](https://github.com/eternnoir/pyTelegramBotAPI)
 - [x] Implement server side whitelist (of users allowed to use the bot)
 - [x] Deploy the code onto a server 
-  - Solved with Heroku 
+  - Solved with Heroku: remember to run `heroku ps:scale worker=1` after starting the enviroment
 - [x] Make final test of everything
 - [x] Add `./` in file paths
 - [x] Add some prompt like `I'm processing your request...`
