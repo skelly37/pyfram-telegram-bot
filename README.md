@@ -15,13 +15,15 @@ Code of a simple bot that can make using WolframAlpha easier. By starting a conv
   - solved with [telebot](https://github.com/eternnoir/pyTelegramBotAPI)
 - [x] Implement server side whitelist (of users allowed to use the bot)
 - [x] Deploy the code onto a server 
+  - Solved with Heroku 
 - [x] Make final test of everything
 - [x] Add `./` in file paths
+- [x] Add some prompt like `I'm processing your request...`
 
 ### TODO:
 - [ ] Introduce type-checker for is_image in WolframBot.query_wolfram() and for telebot.types.Message calls in pyfram_bot.py
 - [ ] Test fastapi or replace infinite pooling with webhook any possible way
-- [ ] Add some prompt like `I'm processing your request...`
+
 - [ ] Handle Step-by-Step anwsers somehow (i.e. put these small pictures together into one and send it)
 - [ ] Write decent documentation
 
