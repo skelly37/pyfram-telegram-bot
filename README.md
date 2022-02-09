@@ -15,11 +15,16 @@ Code of a simple bot that can make using WolframAlpha easier. By starting a conv
   - solved with [telebot](https://github.com/eternnoir/pyTelegramBotAPI)
 - [x] Put WolframAlpha interface into the webhook
 - [x] Implement server side whitelist (of users allowed to use the bot)
+- [x] Deploy the code onto a server 
+- [x] Make final test of everything
+
 ### TODO:
 - [ ] Introduce type-checker for is_image in WolframBot.query_wolfram() and for telebot.types.Message calls in pyfram_bot.py
-- [ ] Deploy the code onto a server
+- [ ] Add `.` dots in file paths
+- [ ] Test fastapi
+- [ ] Handle Step-by-Step anwsers somehow
 - [ ] Write decent documentation
-- [ ] Make final test of everything
+
 
 ## Why won't we develop a public bot?
 Wolfram API for a non-personal use is quite expensive and we cannot afford being *Santa Claus*. That's why we provide only the code and left the `appID` empty. Feel free to set up such a bot for personal use with your own API key or to gain funds for a fully public one. 
