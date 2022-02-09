@@ -13,16 +13,16 @@ Code of a simple bot that can make using WolframAlpha easier. By starting a conv
 - [x] Python interface for WolframAlpha API
 - [x] Write or find a webhook to work with Telegram Bot API 
   - solved with [telebot](https://github.com/eternnoir/pyTelegramBotAPI)
-- [x] Put WolframAlpha interface into the webhook
 - [x] Implement server side whitelist (of users allowed to use the bot)
 - [x] Deploy the code onto a server 
 - [x] Make final test of everything
+- [x] Add `./` in file paths
 
 ### TODO:
 - [ ] Introduce type-checker for is_image in WolframBot.query_wolfram() and for telebot.types.Message calls in pyfram_bot.py
-- [ ] Add `.` dots in file paths
-- [ ] Test fastapi
-- [ ] Handle Step-by-Step anwsers somehow
+- [ ] Test fastapi or replace infinite pooling with webhook any possible way
+- [ ] Add some prompt like `I'm processing your request...`
+- [ ] Handle Step-by-Step anwsers somehow (i.e. put these small pictures together into one and send it)
 - [ ] Write decent documentation
 
 
