@@ -28,32 +28,45 @@ def welcome_and_help(message) -> None:
     else:
         bot.reply_to(message, "Sorry but you're not authorized to use this bot :)")
 
-@bot.message_handler(commands=["i", "image"])
-def send_image(message) -> None:
-    if is_authorized(message):
-        text = message.text.replace("/i ", "").replace("/image ", "")
-        search = wolfram.query_wolfram(text, is_image=True)
-        search = search.replace("Query result saved in: ", "")
-        bot.send_document(message.chat.id, open(search, "rb"), reply_to_message_id=message.id)
-        system("rm {}".format('"./' + search + '"'))
-    else:
-        bot.reply_to(message, "Sorry but you're not authorized to use this bot :)")
+
+def send_prompt_message(message):
+    data = bot.reply_to(message, "I'm processing your request...")
+    return dict(message_id = data.message_id, chat_id = data.chat.id)
+
+def get_wolfram_response(message):
+    prompt = send_prompt_message(message)
+
+    text = message.text
+    search = wolfram.query_wolfram(text)
+
+    bot.delete_message(prompt["chat_id"], prompt["message_id"])
+    return search
+
+def send_image_result(message, search_result):
+    search_result = search_result.replace("Query result saved in: ", "")
+    bot.send_document(message.chat.id, open(search_result, "rb"), reply_to_message_id=message.id)
+    system("rm {}".format('"./' + search_result + '"'))
 
 
 @bot.message_handler(func=lambda message: True)
 def handle_query(message) -> None:
     if is_authorized(message):
-        text = message.text
-        search = wolfram.query_wolfram(text)
-        if not search.startswith("Query result saved in:"):
-            bot.reply_to(message, search)
+        search_result = get_wolfram_response(message)
+
+        if not search_result.startswith("Query result saved in:"):
+            bot.reply_to(message, search_result)
         else:
-            search = search.replace("Query result saved in: ", "")
-            bot.send_document(message.chat.id, open(search, "rb"), reply_to_message_id=message.id)
-            system("rm {}".format('"./' + search + '"'))
+            send_image_result(message, search_result)
     else:
         bot.reply_to(message, "Sorry but you're not authorized to use this bot :)")
 
+@bot.message_handler(commands=["i", "image"])
+def send_image(message) -> None:
+    if is_authorized(message):
+        search_result = get_wolfram_response(message)
+        send_image_result(message, search_result)
+    else:
+        bot.reply_to(message, "Sorry but you're not authorized to use this bot :)")
 
 if __name__ == "__main__":
     bot.infinity_polling(interval=0, timeout=25)
