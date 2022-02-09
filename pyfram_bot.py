@@ -35,7 +35,7 @@ def send_image(message) -> None:
         search = wolfram.query_wolfram(text, is_image=True)
         search = search.replace("Query result saved in: ", "")
         bot.send_document(message.chat.id, open(search, "rb"), reply_to_message_id=message.id)
-        system("rm ./{}".format('"' + search + '"'))
+        system("rm {}".format('"./' + search + '"'))
     else:
         bot.reply_to(message, "Sorry but you're not authorized to use this bot :)")
 
@@ -50,7 +50,7 @@ def handle_query(message) -> None:
         else:
             search = search.replace("Query result saved in: ", "")
             bot.send_document(message.chat.id, open(search, "rb"), reply_to_message_id=message.id)
-            system("rm ./{}".format('"' + search + '"'))
+            system("rm {}".format('"./' + search + '"'))
     else:
         bot.reply_to(message, "Sorry but you're not authorized to use this bot :)")
 
