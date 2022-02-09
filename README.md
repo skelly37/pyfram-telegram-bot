@@ -27,7 +27,9 @@ Code of a simple bot that can make using WolframAlpha easier. By starting a conv
 
 
 ## Why won't we develop a public bot?
-Wolfram API for a non-personal use is quite expensive and we cannot afford being *Santa Claus*. That's why we provide only the code and left the `appID` empty. Feel free to set up such a bot for personal use with your own API key or to gain funds for a fully public one. 
+Wolfram API for a non-personal use is quite expensive and we cannot afford being *Santa Claus*. That's why we provide only the code and left the `appID` empty. Feel free to set up such a bot for personal use with your own API key or to gain funds for a fully public one.
+
+But if you want to see the bot in action: @wolaph_bot
 
 ## Contribution
 Feel free to create issues, to make PRs, every kind of help is welcome here
