@@ -20,7 +20,7 @@ Code of a simple bot that can make using WolframAlpha easier. By starting a conv
 - [x] Add some prompt like `I'm processing your request...`
 
 ### TODO:
-- [ ] Introduce type-checker for is_image in WolframBot.query_wolfram() and for telebot.types.Message calls in pyfram_bot.py
+- [ ] Make good use of `typing` and enforce strict type checking in all functions.
 - [ ] Test fastapi or replace infinite pooling with webhook any possible way
 - [ ] Make it async (?)
 - [ ] Handle Step-by-Step anwsers somehow (i.e. put these small pictures together into one and send it)
