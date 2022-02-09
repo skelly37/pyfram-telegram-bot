@@ -1,1 +1,1 @@
-web: python3 pyfram_bot.py
+worker: python3 pyfram_bot.py
