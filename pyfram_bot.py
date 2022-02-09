@@ -33,11 +33,11 @@ def send_prompt_message(message):
     data = bot.reply_to(message, "I'm processing your request...")
     return dict(message_id = data.message_id, chat_id = data.chat.id)
 
-def get_wolfram_response(message):
+def get_wolfram_response(message, is_image=False):
     prompt = send_prompt_message(message)
 
-    text = message.text
-    search = wolfram.query_wolfram(text)
+    text = message.text.replace("/image ", "").replace("/i ", "").strip()
+    search = wolfram.query_wolfram(text, is_image)
 
     bot.delete_message(prompt["chat_id"], prompt["message_id"])
     return search
@@ -63,7 +63,7 @@ def handle_query(message) -> None:
 @bot.message_handler(commands=["i", "image"])
 def send_image(message) -> None:
     if is_authorized(message):
-        search_result = get_wolfram_response(message)
+        search_result = get_wolfram_response(message, True)
         send_image_result(message, search_result)
     else:
         bot.reply_to(message, "Sorry but you're not authorized to use this bot :)")
