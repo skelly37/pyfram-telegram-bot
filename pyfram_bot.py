@@ -47,6 +47,14 @@ def send_image_result(message, search_result):
     bot.send_document(message.chat.id, open(search_result, "rb"), reply_to_message_id=message.id)
     system("rm {}".format('"./' + search_result + '"'))
 
+    
+@bot.message_handler(commands=["i", "image"])
+def send_image(message) -> None:
+    if is_authorized(message):
+        search_result = get_wolfram_response(message, True)
+        send_image_result(message, search_result)
+    else:
+        bot.reply_to(message, "Sorry but you're not authorized to use this bot :)")
 
 @bot.message_handler(func=lambda message: True)
 def handle_query(message) -> None:
@@ -60,13 +68,6 @@ def handle_query(message) -> None:
     else:
         bot.reply_to(message, "Sorry but you're not authorized to use this bot :)")
 
-@bot.message_handler(commands=["i", "image"])
-def send_image(message) -> None:
-    if is_authorized(message):
-        search_result = get_wolfram_response(message, True)
-        send_image_result(message, search_result)
-    else:
-        bot.reply_to(message, "Sorry but you're not authorized to use this bot :)")
 
 if __name__ == "__main__":
     bot.infinity_polling(interval=0, timeout=25)
