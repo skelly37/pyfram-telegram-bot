@@ -2,7 +2,7 @@
 Open-source backend for [WolframAlpha](https://wolframalpha.com) Telegram bot
 
 ## Current status:
-*almost finished*
+WolframAlpha bot is in *hehe* Alpha stage. It works well but [needs polishing](#todo)
 
 ### What will be here?
 Code of a simple bot that can make using WolframAlpha easier. By starting a conversation with it, it will:
