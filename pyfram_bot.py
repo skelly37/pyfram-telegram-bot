@@ -9,9 +9,9 @@ from os import system
 from api_calls import WolframBot
 
 if __name__ == "__main__":
-    TOKEN = open("bot_token.txt").readline().strip()
-    WHITELIST = [x.strip() for x in open("whitelist.txt").readlines()]
-    API_KEYS = [x.strip() for x in open("api_key.txt").readlines()]
+    TOKEN = open("./bot_token.txt").readline().strip()
+    WHITELIST = [x.strip() for x in open("./whitelist.txt").readlines()]
+    API_KEYS = [x.strip() for x in open("./api_key.txt").readlines()]
     wolfram = WolframBot(API_KEYS)
 
 bot = telebot.TeleBot(TOKEN, parse_mode="MARKDOWN")
@@ -35,7 +35,7 @@ def send_image(message) -> None:
         search = wolfram.query_wolfram(text, is_image=True)
         search = search.replace("Query result saved in: ", "")
         bot.send_document(message.chat.id, open(search, "rb"), reply_to_message_id=message.id)
-        system("rm {}".format('"' + search + '"'))
+        system("rm ./{}".format('"' + search + '"'))
     else:
         bot.reply_to(message, "Sorry but you're not authorized to use this bot :)")
 
@@ -50,7 +50,7 @@ def handle_query(message) -> None:
         else:
             search = search.replace("Query result saved in: ", "")
             bot.send_document(message.chat.id, open(search, "rb"), reply_to_message_id=message.id)
-            system("rm {}".format('"' + search + '"'))
+            system("rm ./{}".format('"' + search + '"'))
     else:
         bot.reply_to(message, "Sorry but you're not authorized to use this bot :)")
 
