@@ -35,5 +35,9 @@ But if you want to see the bot in action: @wolaph_bot
 ## Contribution
 Feel free to create issues, to make PRs, every kind of help is welcome here
 
+You can reach me and talk about this project on:
+- Telegram (preferred): @skelly37
+- Discord: skelly#3578
+
 ## License
 The code is and will be distributed under the permissive [MIT License](https://github.com/skelly37/pyfram-telegram-bot/blob/main/LICENSE)
