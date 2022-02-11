@@ -2,7 +2,7 @@
 Open-source backend for [WolframAlpha](https://wolframalpha.com) Telegram bot
 
 ## Current status:
-*almost finished*
+WolframAlpha bot is in *hehe* Alpha stage. It works well but [needs polishing](#todo)
 
 ### What will be here?
 Code of a simple bot that can make using WolframAlpha easier. By starting a conversation with it, it will:
@@ -16,14 +16,13 @@ Code of a simple bot that can make using WolframAlpha easier. By starting a conv
 - [x] Implement server side whitelist (of users allowed to use the bot)
 - [x] Deploy the code onto a server 
   - Solved with Heroku: remember to run `heroku ps:scale worker=1` after starting the enviroment (or add it into Procfile)
-- [x] Make final test of everything
 - [x] Add `./` in file paths
 - [x] Add some prompt like `I'm processing your request...`
 
 ### TODO:
-- [ ] Introduce type-checker for is_image in WolframBot.query_wolfram() and for telebot.types.Message calls in pyfram_bot.py
+- [ ] Make good use of `typing` and enforce strict type checking in all functions.
 - [ ] Test fastapi or replace infinite pooling with webhook any possible way
-
+- [ ] Make it async (?)
 - [ ] Handle Step-by-Step anwsers somehow (i.e. put these small pictures together into one and send it)
 - [ ] Write decent documentation
 
@@ -35,6 +34,10 @@ But if you want to see the bot in action: @wolaph_bot
 
 ## Contribution
 Feel free to create issues, to make PRs, every kind of help is welcome here
+
+You can reach me and talk about this project on:
+- Telegram (preferred): @skelly37
+- Discord: skelly#3578
 
 ## License
 The code is and will be distributed under the permissive [MIT License](https://github.com/skelly37/pyfram-telegram-bot/blob/main/LICENSE)
