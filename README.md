@@ -1,26 +1,30 @@
 # pyfram-telegram-bot
 Open-source backend for [WolframAlpha](https://wolframalpha.com) Telegram bot
 
+- Telegram API wrapper: [telebot](https://github.com/eternnoir/pyTelegramBotAPI)
+- Deployed on: Heroku
+
 ## Current status:
-WolframAlpha bot is in *hehe* Alpha stage. It works well but [needs polishing](#todo)
+The bot works pretty fine for the end-user, all the functionality I wanted to introduce is already there. Only the code [needs some polishing](#todo)
 
-### What will be here?
-Code of a simple bot that can make using WolframAlpha easier. By starting a conversation with it, it will:
-- Provide short anwser (default option)
-- Provide simple anwser as a .png file (fallback if no short anwser is available or if specified)
+## What can the end-user achieve with bot? How to use it?
+- `/s` or `/steps` command before actual query — get step-by-step solution (if possible).
+  - **NOTE** This may take quite a long time but it's not a problem with my code, it's WolframAlpha API issue. 
+- `/i` or `/image` command before actual query — force get result as an image.
+- `/start` or `/help` commands — provide basic help.
+- If no commands are provided, the bot has these defaults:
+  - Try getting and sending short text anwser
+  - If the short anwser is not available, return image (as in `/image`)
 
-### Already done:
-- [x] Python interface for WolframAlpha API
-- [x] Work with Telegram Bot API 
-  - solved with [telebot](https://github.com/eternnoir/pyTelegramBotAPI)
-- [x] Implement server side whitelist (of users allowed to use the bot)
-- [x] Deploy the code onto a server 
-  - Solved with Heroku: remember to run `heroku ps:scale worker=1` after starting the enviroment (or add it into Procfile)
-- [x] Add `./` in file paths
-- [x] Add some prompt like `I'm processing your request...`
-- [x] Handle Step-by-Step anwsers somehow (i.e. parse xml)
+## How the code works?
+Well, it's no dark magic. I simply query WolframAlpha API and send text anwser or image:
+  - get user input via telebot
+  - `requests.get()`
+  - then send the result via telebot
 
-### TODO:
+The short import lists are also self-explanatory. As you can see in [TODO](#todo), in free time I'll also introduce type checking. Bot is ready to go to Heroku, code is clear and understandable (at least I hope so).
+
+## TODO:
 - [ ] Make good use of `typing` and enforce strict type checking in all functions.
 - [ ] Write decent documentation, leave comments if needed etc.
 - [ ] Test fastapi or replace infinite pooling with webhook any possible way (?)
