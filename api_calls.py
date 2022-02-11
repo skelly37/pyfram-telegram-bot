@@ -28,7 +28,8 @@ class WolframBot:
             with open(filename, "wb") as f:
                 for chunk in r.iter_content(1024):
                     f.write(chunk)
-        return filename
+            return filename
+        return "Error processing your request."
 
     def __get_url_of_steps_image(self, img_xml):
         img_list = img_xml.split("\n")
