@@ -22,7 +22,7 @@ Code of a simple bot that can make using WolframAlpha easier. By starting a conv
 
 ### TODO:
 - [ ] Make good use of `typing` and enforce strict type checking in all functions.
-- [ ] Write decent documentation
+- [ ] Write decent documentation, leave comments if needed etc.
 - [ ] Test fastapi or replace infinite pooling with webhook any possible way (?)
 - [ ] Make it async (?)
 
