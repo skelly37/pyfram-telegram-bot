@@ -11,21 +11,20 @@ Code of a simple bot that can make using WolframAlpha easier. By starting a conv
 
 ### Already done:
 - [x] Python interface for WolframAlpha API
-- [x] Write or find a webhook to work with Telegram Bot API 
+- [x] Work with Telegram Bot API 
   - solved with [telebot](https://github.com/eternnoir/pyTelegramBotAPI)
 - [x] Implement server side whitelist (of users allowed to use the bot)
 - [x] Deploy the code onto a server 
   - Solved with Heroku: remember to run `heroku ps:scale worker=1` after starting the enviroment (or add it into Procfile)
 - [x] Add `./` in file paths
 - [x] Add some prompt like `I'm processing your request...`
+- [x] Handle Step-by-Step anwsers somehow (i.e. parse xml)
 
 ### TODO:
 - [ ] Make good use of `typing` and enforce strict type checking in all functions.
-- [ ] Test fastapi or replace infinite pooling with webhook any possible way
-- [ ] Make it async (?)
-- [ ] Handle Step-by-Step anwsers somehow (i.e. put these small pictures together into one and send it)
 - [ ] Write decent documentation
-
+- [ ] Test fastapi or replace infinite pooling with webhook any possible way (?)
+- [ ] Make it async (?)
 
 ## Why won't we develop a public bot?
 Wolfram API for a non-personal use is quite expensive and we cannot afford being *Santa Claus*. That's why we provide only the code and left the `appID` empty. Feel free to set up such a bot for personal use with your own API key or to gain funds for a fully public one.
