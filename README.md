@@ -2,7 +2,7 @@
 Open-source backend for [WolframAlpha](https://wolframalpha.com) Telegram bot
 
 - Telegram API wrapper: [telebot](https://github.com/eternnoir/pyTelegramBotAPI)
-- Deployed on: Heroku
+- Deployed on: [Heroku](https://heorku.com)
 
 ## Current status:
 The bot works pretty fine for the end-user, all the functionality I wanted to introduce is already there. Only the code [needs some polishing](#todo)
