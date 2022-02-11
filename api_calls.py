@@ -1,7 +1,6 @@
 from urllib.parse import quote_plus
 from requests import get
 from random import randint
-from json import loads
 from time import sleep
 
 
