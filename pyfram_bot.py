@@ -24,13 +24,17 @@ def is_authorized(message) -> bool:
 @bot.message_handler(commands=["start", "help"])
 def welcome_and_help(message) -> None:
     if is_authorized(message):
-        bot.reply_to(message, "Welcome to WolframAlpha bot. Only text input is supported.\nDefault option is to send short message if possible.\nUse /i or /image to force image output")
+        bot.reply_to(message, "Welcome to WolframAlpha bot. Only text input is supported.\nDefault option is to send short message if possible.\nUse /i or /image to force image output\nUser /s or steps to get step-by-step solution.")
     else:
         bot.reply_to(message, "Sorry but you're not authorized to use this bot :)")
 
 
-def send_prompt_message(message):
-    data = bot.reply_to(message, "I'm processing your request...")
+def send_prompt_message(message, is_step_by_step=False):
+    data = None
+    if is_step_by_step:
+        data = bot.reply_to(message, "I'm processing your request...\nPlease be patient...")
+    else:
+        data = bot.reply_to(message, "I'm processing your request...")
     return dict(message_id = data.message_id, chat_id = data.chat.id)
 
 def get_wolfram_response(message, is_image=False):
@@ -42,6 +46,16 @@ def get_wolfram_response(message, is_image=False):
     bot.delete_message(prompt["chat_id"], prompt["message_id"])
     return search
 
+def get_wolfram_steps(message):
+    prompt = send_prompt_message(message, True)
+
+    text = message.text.replace("/steps ", "").replace("/s ", "").strip()
+    search = wolfram.get_step_by_step(text)
+
+    bot.delete_message(prompt["chat_id"], prompt["message_id"])
+    return search
+
+
 def send_image_result(message, search_result):
     search_result = search_result.replace("Query result saved in: ", "")
     bot.send_document(message.chat.id, open(search_result, "rb"), reply_to_message_id=message.id)
@@ -52,7 +66,21 @@ def send_image_result(message, search_result):
 def send_image(message) -> None:
     if is_authorized(message):
         search_result = get_wolfram_response(message, True)
-        send_image_result(message, search_result)
+        if search_result != "Error processing your request.":
+            send_image_result(message, search_result)
+        else:
+            bot.reply_to(message, search_result)
+    else:
+        bot.reply_to(message, "Sorry but you're not authorized to use this bot :)")
+
+@bot.message_handler(commands=["s", "steps"])
+def send_steps(message) -> None:
+    if is_authorized(message):
+        search_result = get_wolfram_steps(message)
+        if search_result != "Error processing your request." and search_result != "No step by step solution available.":
+            send_image_result(message, search_result)
+        else:
+            bot.reply_to(message, search_result)
     else:
         bot.reply_to(message, "Sorry but you're not authorized to use this bot :)")
 
