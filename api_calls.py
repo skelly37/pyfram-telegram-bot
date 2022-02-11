@@ -7,10 +7,10 @@ from time import sleep
 class WolframBot:
     def __init__(self, app_ids) -> None:
         self.__app_ids = app_ids
-        self.num_of_appids = len(self.__app_ids)
+        self.__num_of_appids = len(self.__app_ids)
 
     def __get_random_id(self) -> str:
-        return self.__app_ids[randint(0, self.num_of_appids - 1)]
+        return self.__app_ids[randint(0, self.__num_of_appids - 1)]
 
     def __short_anwser(self, query: str) -> str:
         url = "https://api.wolframalpha.com/v1/result?appid={}&i={}"
