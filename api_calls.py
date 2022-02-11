@@ -5,6 +5,11 @@ from time import sleep
 
 
 class WolframBot:
+    ERROR_MSG = "Error processing your request"
+    NO_STEPS_MSG = "No step by step solution available"
+    NO_SHORT_MSG = "No short answer available"
+    RESULT_SAVED_MSG = "Query result saved in: "
+
     def __init__(self, app_ids) -> None:
         self.__app_ids = app_ids
         self.__num_of_appids = len(self.__app_ids)
@@ -29,7 +34,7 @@ class WolframBot:
                 for chunk in r.iter_content(1024):
                     f.write(chunk)
             return filename
-        return "Error processing your request."
+        return self.ERROR_MSG
 
     def __get_url_of_steps_image(self, img_xml):
         img_list = img_xml.split("\n")
@@ -40,7 +45,7 @@ class WolframBot:
                 break
 
         if url_index == -1:
-            return "No step by step solution available."
+            return self.NO_STEPS_MSG
 
         url_raw = str(img_list[url_index]).strip()
         url = url_raw.replace(' ', '').replace('<imgsrc=', '').replace('<img src=', '').replace("'", "").replace('"', '')
@@ -58,7 +63,7 @@ class WolframBot:
         img_src = self.__get_url_of_steps_image(response.text)
         sleep(4)
 
-        if img_src != "No step by step solution available.":
+        if img_src != self.NO_STEPS_MSG:
             for count in range(35):
                 r = get(img_src, stream=True)
                 if r.status_code == 200:
@@ -66,21 +71,21 @@ class WolframBot:
                         for chunk in r.iter_content(1024):
                             f.write(chunk)
 
-                    return "Query result saved in: " + filename
+                    return self.RESULT_SAVED_MSG + filename
                 else:
                     sleep(2)
         else:
             return img_src
-        return "Error processing your request."
+        return self.ERROR_MSG
 
     def query_wolfram(self, query: str, is_image=False) -> str:
         if not is_image:
             out = self.__short_anwser(query)
-            if out.strip() != "No short answer available":
+            if out.strip() != self.NO_SHORT_MSG:
                 return out
 
         image_response = self.__get_image(query)
-        if image_response != "Error processing your request.":
-            return "Query result saved in: " + image_response
+        if image_response != self.ERROR_MSG:
+            return self.RESULT_SAVED_MSG + image_response
 
         return image_response
