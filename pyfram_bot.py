@@ -20,7 +20,7 @@ NOT_AUTHORIZED_MSG = "Sorry but you're not authorized to use this bot :)"
 WELCOME_MSG = """Welcome to WolframAlpha bot. Only text input is supported.
 Default option is to send short message if possible.
 Use /i or /image to force image output
-Use /s or steps to get step-by-step solution."""
+Use /s or /steps to get step-by-step solution."""
 PROMPT_MSG = "I'm processing your request..."
 
 #message is telebot.types.Message' type
