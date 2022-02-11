@@ -64,14 +64,15 @@ The whole API wrapper is developed in `WolframBot` class.
       - Desired url from XML. May return "No step by step solution available." (str)
   - `get_step_by_step`
     - Arguments:
-      - None
+      - `query` (str) — question to ask WolframAlpha
     - Returns:
-      - Randomly chosen app ID from `self.__app_ids` (str)
+      - Name of the file where result is stored. May return "Error processing your request." or "No step by step solution available." (str)
   - `query_wolfram`
     - Arguments:
-      - None
+      - `query` (str) — question to ask WolframAlpha
+      - `is_image` (bool, optional) — if True, the method will skip trying to get short anwser and proceed to fetching image in the first place
     - Returns:
-      - Randomly chosen app ID from `self.__app_ids` (str)
+      - Short anwser, filename, may also return "Error processing your request." or "No step by step solution available." (str)
 
 
 
