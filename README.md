@@ -1,5 +1,5 @@
 # pyfram-telegram-bot
-Open-source backend for [WolframAlpha](https://wolframalpha.com) Telegram bot
+Open-source [WolframAlpha](https://wolframalpha.com) Telegram bot
 
 - Telegram API wrapper: [telebot](https://github.com/eternnoir/pyTelegramBotAPI)
 - Deployed on: [Heroku](https://heorku.com)
