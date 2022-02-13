@@ -1,5 +1,5 @@
 # pyfram-telegram-bot
-Open-source backend for [WolframAlpha](https://wolframalpha.com) Telegram bot
+Open-source [WolframAlpha](https://wolframalpha.com) Telegram bot
 
 - Telegram API wrapper: [telebot](https://github.com/eternnoir/pyTelegramBotAPI)
 - Deployed on: [Heroku](https://heorku.com)
@@ -22,7 +22,7 @@ The bot works pretty fine for the end-user, all the functionality I wanted to in
   - If unavailable, both prompt and result will be "No short answer available"
 
 ## Video preview:
-![Bot functionality preview](preview/wolframbot.mp4 "Bot functionality preview")
+![Bot functionality preview](preview/wolframbot.gif "Bot functionality preview")
 
 ## How the code works?
 Well, it's no dark magic. I simply query WolframAlpha API and send text answer or image:
