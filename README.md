@@ -19,6 +19,9 @@ The bot works pretty fine for the end-user, all the functionality I wanted to in
   - If available, prompt will display your question, the result will be the answer
   - If unavailable, both prompt and result will be "No short answer available"
 
+## Video preview:
+![Bot functionality preview](preview/wolframbot.mp4 "Bot functionality preview")
+
 ## How the code works?
 Well, it's no dark magic. I simply query WolframAlpha API and send text answer or image:
   - get user input via telebot
