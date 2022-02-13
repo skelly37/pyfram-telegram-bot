@@ -57,7 +57,7 @@ class WolframBot:
 
     def get_step_by_step(self, query: str) -> str:
         filename: str = "{}.png".format(query)
-        api_url: str = "https://api.wolframalpha.com/v2/query?appid={}&input={}&podstate=Step-by-step+solution&format=image&totaltimeout=2&background=F5F5F5&fontsize=20"
+        api_url: str = "https://api.wolframalpha.com/v2/query?appid={}&input={}&podstate=Step-by-step+solution&format=image&totaltimeout=7&background=F5F5F5&fontsize=20"
         id: str = self.__get_random_id()
 
         query = api_url.format(id, quote_plus(query))
