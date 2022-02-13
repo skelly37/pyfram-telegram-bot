@@ -85,7 +85,7 @@ The whole API wrapper is developed in `WolframBot` class.
 
 ## TODO:
 - [ ] Make good use of `typing` and enforce strict type checking in all functions.
-- [ ] Insert here a short video showing the bot in action.
+- [ ] Write unit tests
 - [ ] Test fastapi or replace infinite pooling with webhook any possible way (?)
 - [ ] Make it async (?)
 
