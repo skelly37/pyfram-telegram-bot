@@ -13,11 +13,14 @@ The bot works pretty fine for the end-user, all the functionality I wanted to in
 - `/i` or `/image` command before actual query — force get result as an image.
 - `/start` or `/help` commands — provide basic help.
 - If no commands are provided, the bot has these defaults:
-  - Try getting and sending short text anwser
-  - If the short anwser is not available, return image (as in `/image`)
+  - Try getting and sending short text answer
+  - If the short answer is not available, return image (as in `/image`)
+- Inline mode works only for simple answers:
+  - If available, prompt will display your question, the result will be the answer
+  - If unavailable, both prompt and result will be "No short answer available"
 
 ## How the code works?
-Well, it's no dark magic. I simply query WolframAlpha API and send text anwser or image:
+Well, it's no dark magic. I simply query WolframAlpha API and send text answer or image:
   - get user input via telebot
   - `requests.get()`
   - then send the result via telebot
@@ -47,7 +50,7 @@ The whole API wrapper is developed in `WolframBot` class.
       - None
     - Returns:
       - Randomly chosen app ID from `self.__app_ids` (str)
-  - `__short_anwser`
+  - `__short_answer`
     - Arguments:
       - `query` (str) — question to ask WolframAlpha
     - Returns:
@@ -70,9 +73,10 @@ The whole API wrapper is developed in `WolframBot` class.
   - `query_wolfram`
     - Arguments:
       - `query` (str) — question to ask WolframAlpha
-      - `is_image` (bool, optional) — if True, the method will skip trying to get short anwser and proceed to fetching image in the first place
+      - `is_image` (bool, optional) — if True, the method will skip trying to get short answer and proceed to fetching image in the first place
+      - `inline_mode` (bool, optional) — if True, the method will skip trying to get image answer and will send any result of fetching simple answer. 
     - Returns:
-      - Short anwser, filename, may also return "Error processing your request." or "No step by step solution available." (str)
+      - Short answer, filename, may also return "Error processing your request." or "No step by step solution available." (str)
 
 
 
@@ -80,7 +84,6 @@ The whole API wrapper is developed in `WolframBot` class.
 - [ ] Make good use of `typing` and enforce strict type checking in all functions.
 - [ ] Insert here a short video showing the bot in action.
 - [ ] Test fastapi or replace infinite pooling with webhook any possible way (?)
-- [ ] Develop inline mode (?)
 - [ ] Make it async (?)
 
 ## Contribution
