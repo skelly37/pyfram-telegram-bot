@@ -110,6 +110,17 @@ def handle_query(message) -> None:
     else:
         bot.reply_to(message, NOT_AUTHORIZED_MSG)
 
+@bot.inline_handler(lambda message: len(message.query) > 0)
+def handle_inline_query(inline_query):
+    q = inline_query.query
+    res = wolfram.query_wolfram(query=q, is_image=False, inline_mode=True)
+    if res != WolframBot.NO_SHORT_MSG:
+        r = telebot.types.InlineQueryResultArticle('1', q, telebot.types.InputTextMessageContent(res))
+    else:
+        r = telebot.types.InlineQueryResultArticle('1', res, telebot.types.InputTextMessageContent(res))
+
+    bot.answer_inline_query(inline_query.id, [r])
+
 
 if __name__ == "__main__":
     bot.infinity_polling(interval=0, timeout=25)

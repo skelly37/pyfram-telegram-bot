@@ -28,7 +28,7 @@ class WolframBot:
         api_url = "https://api.wolframalpha.com/v1/simple?appid={}&i={}&background=F5F5F5&fontsize=20"
         id = self.__get_random_id()
         query = api_url.format(id, quote_plus(query))
-        r = get(query, stream = True)
+        r = get(query, stream=True)
         if r.status_code == 200:
             with open(filename, "wb") as f:
                 for chunk in r.iter_content(1024):
@@ -41,17 +41,17 @@ class WolframBot:
         url_index = -1
         for i in range(len(img_list)):
             if "Possible intermediate steps" in img_list[i]:
-                url_index = i+1
+                url_index = i + 1
                 break
 
         if url_index == -1:
             return self.NO_STEPS_MSG
 
         url_raw = str(img_list[url_index]).strip()
-        url = url_raw.replace(' ', '').replace('<imgsrc=', '').replace('<img src=', '').replace("'", "").replace('"', '')
+        url = url_raw.replace(' ', '').replace('<imgsrc=', '').replace('<img src=', '').replace("'", "").replace('"',
+                                                                                                                 '')
 
         return url
-
 
     def get_step_by_step(self, query: str) -> str:
         filename = "{}.png".format(query)
@@ -78,10 +78,10 @@ class WolframBot:
             return img_src
         return self.ERROR_MSG
 
-    def query_wolfram(self, query: str, is_image=False) -> str:
+    def query_wolfram(self, query: str, is_image=False, inline_mode=False) -> str:
         if not is_image:
             out = self.__short_anwser(query)
-            if out.strip() != self.NO_SHORT_MSG:
+            if out.strip() != self.NO_SHORT_MSG or inline_mode:
                 return out
 
         image_response = self.__get_image(query)
