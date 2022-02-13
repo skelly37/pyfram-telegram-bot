@@ -17,7 +17,7 @@ class WolframBot:
     def __get_random_id(self) -> str:
         return self.__app_ids[randint(0, self.__num_of_appids - 1)]
 
-    def __short_anwser(self, query: str) -> str:
+    def __short_answer(self, query: str) -> str:
         url = "https://api.wolframalpha.com/v1/result?appid={}&i={}"
         id = self.__get_random_id()
         query = url.format(id, quote_plus(query))
@@ -80,7 +80,7 @@ class WolframBot:
 
     def query_wolfram(self, query: str, is_image=False, inline_mode=False) -> str:
         if not is_image:
-            out = self.__short_anwser(query)
+            out = self.__short_answer(query)
             if out.strip() != self.NO_SHORT_MSG or inline_mode:
                 return out
 
