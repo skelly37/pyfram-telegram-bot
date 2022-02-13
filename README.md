@@ -3,6 +3,8 @@ Open-source [WolframAlpha](https://wolframalpha.com) Telegram bot
 
 - Telegram API wrapper: [telebot](https://github.com/eternnoir/pyTelegramBotAPI)
 - Deployed on: [Heroku](https://heorku.com)
+- Static type checking: [mypy](https://mypy.readthedocs.io/en/stable/getting_started.html)
+  - `mypy pyfram_bot.py api_calls.py` ->  **Success: no issues found in 2 source files**
 
 ## Current status:
 The bot works pretty fine for the end-user, all the functionality I wanted to introduce is already there. Only the code [needs some polishing](#todo)
@@ -84,8 +86,7 @@ The whole API wrapper is developed in `WolframBot` class.
 
 
 ## TODO:
-- [ ] Make good use of `typing` and enforce strict type checking in all functions.
-- [ ] Write unit tests
+- [ ] Write a script with unit tests and mypy static type checking to run before each deployment.
 - [ ] Test fastapi or replace infinite pooling with webhook any possible way (?)
 - [ ] Make it async (?)
 
