@@ -116,16 +116,20 @@ def handle_query(message: telebot.types.Message) -> None:
 
 @bot.inline_handler(lambda message: len(message.query) > 0)
 def handle_inline_query(inline_query: telebot.types.InlineQuery) -> None:
-    q: str = inline_query.query
-    res: str = wolfram.query_wolfram(query=q, is_image=False, inline_mode=True)
-    if res != WolframBot.NO_SHORT_MSG:
-        r = telebot.types.InlineQueryResultArticle("1", q, telebot.types.InputTextMessageContent(res))
+    if inline_query.from_user.username in WHITELIST:
+        q: str = inline_query.query
+        res: str = wolfram.query_wolfram(query=q, is_image=False, inline_mode=True)
+        if res != WolframBot.NO_SHORT_MSG:
+            r = telebot.types.InlineQueryResultArticle("1", q, telebot.types.InputTextMessageContent(res))
+        else:
+            r = telebot.types.InlineQueryResultArticle("1", res, telebot.types.InputTextMessageContent(res))
+
+        # noinspection PyTypeChecker
+        bot.answer_inline_query(inline_query.id, [r])
     else:
-        r = telebot.types.InlineQueryResultArticle("1", res, telebot.types.InputTextMessageContent(res))
-
-    # noinspection PyTypeChecker
-    bot.answer_inline_query(inline_query.id, [r])
-
+        r = telebot.types.InlineQueryResultArticle("1", NOT_AUTHORIZED_MSG, telebot.types.InputTextMessageContent(NOT_AUTHORIZED_MSG))
+        # noinspection PyTypeChecker
+        bot.answer_inline_query(inline_query.id, [r])
 
 if __name__ == "__main__":
     bot.infinity_polling(interval=0, timeout=25)

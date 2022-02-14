@@ -63,10 +63,10 @@ class WolframBot:
         query = api_url.format(id, quote_plus(query))
         response = get(query)
         img_src: str = self.__get_url_of_steps_image(response.text)
-        sleep(4)
+        sleep(5)
 
         if img_src != self.NO_STEPS_MSG:
-            for count in range(35):
+            for count in range(30):
                 r = get(img_src, stream=True)
                 if r.status_code == 200:
                     with open(filename, "wb") as f:
@@ -75,7 +75,8 @@ class WolframBot:
 
                     return self.RESULT_SAVED_MSG + filename
                 else:
-                    sleep(2)
+                    print(img_src)
+                    sleep(3)
         else:
             return img_src
         return self.ERROR_MSG
