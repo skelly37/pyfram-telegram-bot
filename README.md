@@ -5,6 +5,8 @@ Open-source [WolframAlpha](https://wolframalpha.com) Telegram bot
 - Deployed on: [Heroku](https://heorku.com)
 - Static type checking: [mypy](https://mypy.readthedocs.io/en/stable/getting_started.html)
   - `mypy pyfram_bot.py api_calls.py` ->  **Success: no issues found in 2 source files**
+- Unit tests: [test_bot.py](tests/test_bot.py)
+  - Sometimes you'll have to run tests twice (or even thrice). It's rather a problem with the API and time needed to process the request for step-by-step image.
 
 ## Current status:
 The bot works pretty fine for the end-user, all the functionality I wanted to introduce is already there. Only the code [needs some polishing](#todo)
