@@ -20,14 +20,14 @@ class WolframBot:
         return self.__app_ids[randint(0, self.__num_of_appids - 1)]
 
     def __short_answer(self, query: str) -> str:
-        url: str = "https://api.wolframalpha.com/v1/result?appid={}&i={}"
+        url: str = "https://api.wolframalpha.com/v1/result?appid={}&i={}&units=metric"
         id: str = self.__get_random_id()
         query = url.format(id, quote_plus(query))
         return get(query).text
 
     def __get_image(self, query: str) -> str:
         filename: str = "{}.png".format(query)
-        api_url: str = "https://api.wolframalpha.com/v1/simple?appid={}&i={}&background=F5F5F5&fontsize=20"
+        api_url: str = "https://api.wolframalpha.com/v1/simple?appid={}&i={}&background=F5F5F5&fontsize=20&units=metric"
         id : str= self.__get_random_id()
         query = api_url.format(id, quote_plus(query))
         r = get(query, stream=True)
@@ -57,7 +57,7 @@ class WolframBot:
 
     def get_step_by_step(self, query: str) -> str:
         filename: str = "{}.png".format(query)
-        api_url: str = "https://api.wolframalpha.com/v2/query?appid={}&input={}&podstate=Step-by-step+solution&format=image&totaltimeout=7&background=F5F5F5&fontsize=20"
+        api_url: str = "https://api.wolframalpha.com/v2/query?appid={}&input={}&podstate=Step-by-step+solution&format=image&totaltimeout=7&background=F5F5F5&fontsize=20&units=metric"
         id: str = self.__get_random_id()
 
         query = api_url.format(id, quote_plus(query))

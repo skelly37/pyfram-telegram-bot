@@ -3,7 +3,7 @@ from api_calls import WolframBot
 import os
 
 class BotsTests(unittest.TestCase):
-    API_KEYS = [x.strip() for x in open("./api_key.txt").readlines()]
+    API_KEYS = [x.strip() for x in open("../api_key.txt").readlines()]
     wb = WolframBot(API_KEYS)
 
     def __get_image(self, query, step_by_step=False, force=False):
@@ -23,6 +23,8 @@ class BotsTests(unittest.TestCase):
 
 
     def test_wolframbot(self):
+        #be careful when running
+        os.system("rm *.png")
         self.assertEqual(self.wb.query_wolfram("2+2"), "4")                                                                     # short answers
         self.assertEqual(self.__get_image_data("x^2 chart"),
                          {"name": "x^2 chart.png", "empty": False})                                                             # fallback to image in default mode correct
@@ -41,6 +43,9 @@ class BotsTests(unittest.TestCase):
                          {"name": "2+2.png", "empty": False})                                                                   # step by step correct
         print("Testing second step-by-step solution...")
         self.assertEqual(self.__get_image_data("x^2 chart", step_by_step=True), self.wb.NO_STEPS_MSG)                           # step by step incorrect
+
+        #clean the directory after running
+        os.system("rm *.png")
 
     def test_pyfram_bot(self):
         pass
