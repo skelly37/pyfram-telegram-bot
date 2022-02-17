@@ -12,24 +12,27 @@ class WolframBot:
     NO_SHORT_MSG: str = "No short answer available"
     RESULT_SAVED_MSG: str = "Query result saved in: "
 
-    def __init__(self, app_ids: Sequence[str]) -> None:
+    def __init__(self, app_ids: Sequence[str], background: str = "F5F5F5", fontsize: str = "21", units: str ="metric") -> None:
         self.__app_ids: Sequence[str] = app_ids
+        self.__background = background
+        self.__fontsize = fontsize
+        self.__units = units
         self.__num_of_appids: int = len(self.__app_ids)
 
     def __get_random_id(self) -> str:
         return self.__app_ids[randint(0, self.__num_of_appids - 1)]
 
     def __short_answer(self, query: str) -> str:
-        url: str = "https://api.wolframalpha.com/v1/result?appid={}&i={}&units=metric"
+        url: str = "https://api.wolframalpha.com/v1/result?appid={}&i={}&units={}"
         id: str = self.__get_random_id()
-        query = url.format(id, quote_plus(query))
+        query = url.format(id, quote_plus(query), self.__units)
         return get(query).text
 
     def __get_image(self, query: str) -> str:
         filename: str = "{}.png".format(query)
-        api_url: str = "https://api.wolframalpha.com/v1/simple?appid={}&i={}&background=F5F5F5&fontsize=20&units=metric"
+        api_url: str = "https://api.wolframalpha.com/v1/simple?appid={}&i={}&background={}&fontsize={}&units={}"
         id : str= self.__get_random_id()
-        query = api_url.format(id, quote_plus(query))
+        query = api_url.format(id, quote_plus(query), self.__background, self.__fontsize, self.__units)
         r = get(query, stream=True)
         if r.status_code == 200:
             with open(filename, "wb") as f:
@@ -50,17 +53,16 @@ class WolframBot:
             return self.NO_STEPS_MSG
 
         url_raw: str = str(img_list[url_index]).strip()
-        url: str = url_raw.replace(' ', '').replace('<imgsrc=', '').replace('<img src=', '').replace("'", "").replace('"',
-                                                                                                                 '')
+        url: str = url_raw.replace(' ', '').replace('<imgsrc=', '').replace('<img src=', '').replace("'", "").replace('"', '')
 
         return url
 
     def get_step_by_step(self, query: str) -> str:
         filename: str = "{}.png".format(query)
-        api_url: str = "https://api.wolframalpha.com/v2/query?appid={}&input={}&podstate=Step-by-step+solution&format=image&totaltimeout=7&background=F5F5F5&fontsize=20&units=metric"
+        api_url: str = "https://api.wolframalpha.com/v2/query?appid={}&input={}&podstate=Step-by-step+solution&format=image&totaltimeout=8&background={}&fontsize={}&units={}"
         id: str = self.__get_random_id()
 
-        query = api_url.format(id, quote_plus(query))
+        query = api_url.format(id, quote_plus(query), self.__background, self.__fontsize, self.__units)
         response = get(query)
         img_src: str = self.__get_url_of_steps_image(response.text)
         sleep(5)
