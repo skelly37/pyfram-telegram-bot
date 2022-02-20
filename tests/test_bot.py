@@ -1,6 +1,7 @@
 import unittest
 from api_calls import WolframBot
 import os
+from subprocess import check_output
 
 class BotsTests(unittest.TestCase):
     API_KEYS = [x.strip() for x in open("../api_key.txt").readlines()]
@@ -21,8 +22,13 @@ class BotsTests(unittest.TestCase):
 
         return filename
 
+    def test_typing(self):
+        print("Type checking with mypy...")
+        result = check_output("mypy ../api_calls.py ../pyfram_bot.py", shell=True, universal_newlines=True)
+        self.assertEqual(result.startswith("Success"), True)
 
     def test_wolframbot(self):
+        print("Testing WolframBot")
         #be careful when running
         os.system("rm *.png")
         self.assertEqual(self.wb.query_wolfram("2+2"), "4")                                                                     # short answers
@@ -50,7 +56,6 @@ class BotsTests(unittest.TestCase):
     def test_pyfram_bot(self):
         pass
         #TODO pyfram_bot.py tests
-
 
 if __name__ == '__main__':
     unittest.main()
