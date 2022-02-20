@@ -1,7 +1,9 @@
 import unittest
-from api_calls import WolframBot
 import os
 from subprocess import check_output
+
+from api_calls import WolframBot
+
 
 class BotsTests(unittest.TestCase):
     API_KEYS = [x.strip() for x in open("../api_key.txt").readlines()]
