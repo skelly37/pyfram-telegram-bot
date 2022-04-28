@@ -2,6 +2,7 @@ from urllib.parse import quote_plus
 from requests import get
 from random import randint
 from time import sleep
+from os.path import exists
 
 from typing import List, Sequence
 
@@ -22,6 +23,13 @@ class WolframBot:
     def __get_random_id(self) -> str:
         return self.__app_ids[randint(0, self.__num_of_appids - 1)]
 
+    def __get_filename(self, filename) -> str:
+        try:
+            open(filename, "wb").close()
+            return filename
+        except FileNotFoundError:
+            return "response.png"
+
     def __short_answer(self, query: str) -> str:
         url: str = "https://api.wolframalpha.com/v1/result?appid={}&i={}&units={}"
         id: str = self.__get_random_id()
@@ -35,6 +43,8 @@ class WolframBot:
         query = api_url.format(id, quote_plus(query), self.__background, self.__fontsize, self.__units)
         r = get(query, stream=True)
         if r.status_code == 200:
+            filename = self.__get_filename(filename)
+            
             with open(filename, "wb") as f:
                 for chunk in r.iter_content(1024):
                     f.write(chunk)
@@ -71,6 +81,8 @@ class WolframBot:
             for count in range(30):
                 r = get(img_src, stream=True)
                 if r.status_code == 200:
+                    filename = self.__get_filename(filename)
+
                     with open(filename, "wb") as f:
                         for chunk in r.iter_content(1024):
                             f.write(chunk)

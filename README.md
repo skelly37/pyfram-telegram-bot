@@ -5,7 +5,7 @@ Open-source [WolframAlpha](https://wolframalpha.com) Telegram bot
 - Deployed on: [Heroku](https://heorku.com)
 - Static type checking: [mypy](https://mypy.readthedocs.io/en/stable/getting_started.html)
   - `mypy pyfram_bot.py api_calls.py` ->  **Success: no issues found in 2 source files**
-- Unit tests: [test_bot.py](tests/test_bot.py)
+- Unit tests: [test_bot.py](test_bot.py)
   - Sometimes you'll have to run tests twice (or even thrice). It's rather a problem with the API and time needed to process the request for step-by-step image.
 
 ## Current status:
@@ -84,13 +84,6 @@ The whole API wrapper is developed in `WolframBot` class.
       - `inline_mode` (bool, optional) — if True, the method will skip trying to get image answer and will send any result of fetching simple answer. 
     - Returns:
       - Short answer, filename, may also return "Error processing your request." or "No step by step solution available." (str)
-
-
-
-## TODO:
-- [ ] Write a script with unit tests and mypy static type checking to run before each deployment.
-- [ ] Test fastapi or replace infinite pooling with webhook any possible way (?)
-- [ ] Make it async (?)
 
 ## Contribution
 Feel free to create issues, to make PRs, every kind of help is welcome here

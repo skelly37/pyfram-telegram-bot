@@ -6,7 +6,7 @@ from api_calls import WolframBot
 
 
 class BotsTests(unittest.TestCase):
-    API_KEYS = [x.strip() for x in open("../api_key.txt").readlines()]
+    API_KEYS = [x.strip() for x in open("api_key.txt").readlines()]
     wb = WolframBot(API_KEYS)
 
     def __get_image(self, query, step_by_step=False, force=False):
@@ -26,16 +26,19 @@ class BotsTests(unittest.TestCase):
 
     def test_typing(self):
         print("Type checking with mypy...")
-        result = check_output("mypy ../api_calls.py ../pyfram_bot.py", shell=True, universal_newlines=True)
+        result = check_output("mypy api_calls.py pyfram_bot.py", shell=True, universal_newlines=True)
         self.assertEqual(result.startswith("Success"), True)
 
-    def test_wolframbot(self):
+    def test_normal_answers(self):
         print("Testing WolframBot")
         #be careful when running
         os.system("rm *.png")
         self.assertEqual(self.wb.query_wolfram("2+2"), "4")                                                                     # short answers
         self.assertEqual(self.__get_image_data("x^2 chart"),
                          {"name": "x^2 chart.png", "empty": False})                                                             # fallback to image in default mode correct
+
+        self.assertEqual(self.__get_image_data("lim x->0 ((e^x+1)/x)"),                                                         #create response.png if filename fails to be saved
+                         {"name": "response.png", "empty": False})
 
 
         self.assertEqual(self.wb.query_wolfram("2+2", inline_mode=True), "4")                                                   # inline mode correct
@@ -46,6 +49,7 @@ class BotsTests(unittest.TestCase):
                          {"name": "x^2 chart.png", "empty": False})                                                             # forced image correct
         self.assertEqual(self.__get_image_data("2qi42df3bf328yf2d wpqd32 9e7 31 3c", force=True), self.wb.ERROR_MSG)            # forced image incorrect
 
+    def test_step_by_step(self):
         print("Testing step-by-step solutions... Be patient.")
         self.assertEqual(self.__get_image_data("2+2", step_by_step=True),
                          {"name": "2+2.png", "empty": False})                                                                   # step by step correct
@@ -54,10 +58,6 @@ class BotsTests(unittest.TestCase):
 
         #clean the directory after running
         os.system("rm *.png")
-
-    def test_pyfram_bot(self):
-        pass
-        #TODO pyfram_bot.py tests
 
 if __name__ == '__main__':
     unittest.main()
